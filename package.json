@@ -1,0 +1,11 @@
+{
+  "name": "mxtools-pdf-encrypt",
+  "version": "1.0.0",
+  "description": "A Node.js wrapper for a .NET console application, designed specifically for Linux environments. This package facilitates easy encryption and decryption of PDF files. It features two primary functions: PdfEncryptFromFile, which encrypts PDF files directly from the file path, and PdfEncryptFromBase64, which handles PDF encryption from a base64 string. Both functions support owner and user password settings for enhanced security. Ideal for Node.js projects requiring secure handling of PDF documents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Equipo  QS",
+  "license": "ISC"
+}
