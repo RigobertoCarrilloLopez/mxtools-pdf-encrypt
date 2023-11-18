@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { exec } = require('child_process');
 const { Readable } = require('stream');
+const os = require('os');
 
 // Función para convertir un archivo a Base64
 function fileToBase64(filePath, callback) {
@@ -28,8 +29,12 @@ function fileFromBase64(base64Data, filePath, callback) {
     });
 }
 
+
 function encryptPdfBase64(inputBase64, password, callback) {
-    const childProcess = exec(`./mxtools-pdf-encrypt-base64 ${password}`, (error, stdout, stderr) => {
+    const isWindows = os.platform() === 'win32';
+    const command = isWindows ? './mxtools-pdf-encrypt-base64.exe' : './mxtools-pdf-encrypt-base64';
+
+    const childProcess = exec(`${command} ${password}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
             return callback(error, null);
@@ -44,7 +49,6 @@ function encryptPdfBase64(inputBase64, password, callback) {
     const readable = Readable.from(inputBase64);
     readable.pipe(childProcess.stdin);
 }
-
 
 // Función para encriptar un archivo PDF
 function encryptPdfFile(inputFilePath, outputFilePath, password, callback) {
